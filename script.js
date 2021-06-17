@@ -7,7 +7,9 @@ window.addEventListener("load", function() {
         response.json().then(function(json) {
             const container = document.getElementById("container");     
             // const statusCheck = document.getElementById("status"); 
-
+            const astronautCount = document.getElementById("numberOfAstronauts");
+           
+            astronautCount.innerHTML = `The astronaut count is ${json.length}`;
         
             // json.sort();
 
@@ -25,41 +27,36 @@ window.addEventListener("load", function() {
 
             json.sort(sortByProperty("hoursInSpace"));
 
-
+            let abcd = "";
 
             for(i=0;i<json.length;i++){
-
-                let statusCheck = document.getElementById("status");
-                
-                if (`${json[i].active}` === "true"){
+                let statusChecking = json[i].active;        
+                       if(statusChecking === true){
+                           abcd = "status";// adding the style 
+                       }
+                 // let statusCheck = document.getElementsByClassName("status");
+                    // if (`${json[i].active}` === "true"){
                     // if(statusCheck.innerHTML === true)
-                    alert("checking if active is true");
-                    
-                    // status.style.color = '#008000';
-                    // statusCheck.style.color = 'green';
-                    statusCheck.style["color"] = "green";
+                    // alert("checking if active is true");
+                    // statusCheck.style["color"] = "green";
                     // document.getElementById('status').classList.add('greenColor');
                     // statusCheck.className= 'greenColor';
+                                // }
                 
-                }
                 container.innerHTML += `<div class="astronaut">
                 <div class="bio">
                 <h3>${json[i].firstName} ${json[i].lastName}</h3>
                 <ul>
                 <li>Hours in space: ${json[i].hoursInSpace}</li>
-
-                <li id="status">Active: ${json[i].active}</li>
-
+                <li class=${abcd}>Active: ${json[i].active}</li>
                 <li>Skills: ${json[i].skills}</li>
                 </ul>
                 </div>
                 <img class="avatar" src=${json[i].picture}>
-                </div>`;
-
-                
-                
+                </div>`;               
             }
            
+          
             // alert(statusCheck);
            
 
